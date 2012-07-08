@@ -42,7 +42,18 @@ class Entry
   def exception(exception)
 
     lines = exception.backtrace
-    lines = lines.collect{|l|{msg:l}}
+    x = 0
+    lines = lines.collect do |l|
+      parts = l.match(%r{^(#{Regexp.quote(::Rails.root.to_s)})?(.*):(\d+):in `(.*?)'$})
+      x += 1
+      {
+        num: x,
+        msg: parts[2],
+        app_path: parts[1],
+        line_num: parts[3],
+        in: parts[4]
+      }
+    end
 
     self.backtrace = {
       name:    exception.class.name,
