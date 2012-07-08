@@ -4,7 +4,14 @@ class App.Views.Entries.Entry extends Backbone.View
     'click': 'toggle'
   initialize: ->
     @model.bind 'change', @render
+    @model.bind 'unselect', @unselect
+    @model.bind 'select', @select
+    @model.bind 'open', @toggle
     @render()
+  select: =>
+    $(@el).addClass 'selected'
+  unselect: =>
+    $(@el).removeClass 'selected'
   render: =>
     attrs = @model.attrs()
     @el_template 'entries/entry', attrs

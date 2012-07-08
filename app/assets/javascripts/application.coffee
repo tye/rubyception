@@ -6,6 +6,7 @@
 #= require lib/milk
 #= require lib/inflections
 #= require lib/jenny
+#= require lib/mousetrap
 #= require template
 #= require init
 #= require_tree ./routers
