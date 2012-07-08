@@ -40,10 +40,14 @@ class Entry
   end
 
   def exception(exception)
+
+    lines = exception.backtrace
+    lines = lines.collect{|l|{msg:l}}
+
     self.backtrace = {
       name:    exception.class.name,
       message: exception.message,
-      lines:   exception.backtrace }
+      lines:   lines }
     flush!
   end
 

@@ -1,6 +1,9 @@
 entries:
   - index
   - entry
+backtrace_lines:
+  - index
+  - backtrace_line
 lines:
   - index
   - line

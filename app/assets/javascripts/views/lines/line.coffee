@@ -3,5 +3,4 @@ class App.Views.Lines.Line extends Backbone.View
   initialize: ->
     @render()
   render: ->
-    attrs = @model.attrs()
-    @el_template 'lines/line', attrs
+    @el_template 'lines/line'

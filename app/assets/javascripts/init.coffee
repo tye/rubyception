@@ -1,9 +1,10 @@
 window.App =
-  Collections: {}
-  Models: {}
-  Routers: {}
+  Collections : {}
+  Models      : {}
+  Routers     : {}
   Views:
-    Logs: {}
-    Entries: {}
-    Shared: {}
-    Lines: {}
+    Logs           : {}
+    Entries        : {}
+    Shared         : {}
+    Lines          : {}
+    BacktraceLines : {}

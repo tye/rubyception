@@ -57,33 +57,36 @@ html,body
         :color rgb(50,250,100)
       .datetime
         :color rgb(120,120,120)
-  .lines
+  .lines, .backtrace_lines
     :display none
   &.selected
     :border 1px solid rgb(255,0,255)
   &.open
-    .lines
+    .lines, .backtrace_lines
       :display block
       :font-family 'Menlo'
       :margin
         :top 5px
       :background rgb(32, 32, 32)
       +box-shadow(rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset)
+    .line, .backtrace_line
       .line
         :font-size 11px
-        .num,.txt
+    .lines
+      .line
+        .num,.msg
           :display inline-block
           :padding 1px 5px
-        .txt
+        .msg
           :padding
             :left 1px
         .num
           :background rgb(0,0,0)
       .line:first-child
-        .num,.txt
+        div
           :padding
             :top 5px
       .line:last-child
-        .num,.txt
+        div
           :padding
             :bottom 5px

@@ -13,15 +13,16 @@ class App.Views.Entries.Entry extends Backbone.View
   unselect: =>
     $(@el).removeClass 'selected'
   render: =>
-    attrs = @model.attrs()
-    @el_template 'entries/entry', attrs
+    @el_template 'entries/entry'
     @color_ms()
     @color_marker()
     @backtrace()
   backtrace:->
     backtrace = @model.get 'backtrace'
     if backtrace
-      console.log 'backtRACEEE!'
+      el = $(@el).find '.backtrace_lines'
+      @collect 'backtrace_lines', el: el
+      @collection.reset backtrace.lines
   color_marker:->
     backtrace = @model.get 'backtrace'
     c =  if backtrace then 'error'
@@ -38,7 +39,3 @@ class App.Views.Entries.Entry extends Backbone.View
     e.addClass c
   toggle:->
     $(@el).toggleClass 'open'
-
-    #lines_data = @model.get 'lines'
-    #@collect 'lines'
-    #@collection.reset lines_data

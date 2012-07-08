@@ -170,19 +170,19 @@ BackboneHelpers =
       model_name.camelize()
     else
       klass.singularize()
-    @collection = if @options.collection
+    @collection = if @options.collection isnt undefined
       collection = options['collection']
       delete options['collection']
       collection
     else
       new App.Collections[klass]
-      result_model = @result_model || "#{model_name}Result"
-      if App.Models[result_model]
-        @collection.results_model = new App.Models[result_model]()
-        @collection.results_model.collection = @collection
-      @collection.model         = App.Models[model_name]
-      @collection.url           = url
-    @collection.name          = name
+    result_model = @result_model || "#{model_name}Result"
+    if App.Models[result_model]
+      @collection.results_model = new App.Models[result_model]()
+      @collection.results_model.collection = @collection
+    @collection.url   = url
+    @collection.model = App.Models[model_name]
+    @collection.name  = name
     options                 ||= {}
     options.collection        = @collection
 

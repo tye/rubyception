@@ -1,5 +1,5 @@
 class App.Views.Lines.Index extends Backbone.View
   initialize: ->
-    #@render()
-  render: ->
+    @bind_render()
+  render: =>
     @collection.collect()
