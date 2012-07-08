@@ -19,7 +19,8 @@ html,body
 .entry
   :position relative
   +box-shadow(rgba(255, 255, 255, 0.07) 0 1px 0)
-  :border-bottom 1px solid rgb(18, 18, 18)
+  :border
+    :bottom 1px solid rgb(18, 18, 18)
   :font-size 14px
   :color rgb(195,195,195)
   :margin
@@ -60,7 +61,7 @@ html,body
   .lines, .backtrace_lines
     :display none
   &.selected
-    :border 1px solid rgb(255,0,255)
+    :background rgb(55,55,55)
   &.open
     .lines, .backtrace_lines
       :display block
