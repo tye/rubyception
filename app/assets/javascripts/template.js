@@ -1,0 +1,1 @@
+Template = {"entries":{"index":"<div class='entries'></div>\n","entry":"I AM ENTRY {{id}}\n"}}

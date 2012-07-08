@@ -3,5 +3,6 @@ class App.Views.Logs.Show extends Backbone.View
   initialize: ->
     @render()
   render: ->
-    @collect 'entries'
+    @collect 'entries',
+      el: '.content'
     @collection.reset [{id:1},{id:2}]

@@ -75,6 +75,7 @@ CollectionHelpers =
     delete options.template
     template = "#{@name}/#{@name.singularize()}"
     template = t if t isnt undefined
+    selector = e
     selector = e.find(find) if has_find
     primer   =  options.primer || template_index
     selector.html ''
