@@ -9,6 +9,7 @@ class Entry
   attr_accessor :id
   attr_accessor :params
   attr_accessor :backtrace
+  attr_accessor :finished
 
   def initialize(event)
     set_values event
@@ -17,7 +18,7 @@ class Entry
 
   def set_values event
     payload = event.payload
-    self.controller = payload[:controller]
+    self.controller = payload[:controller].gsub(/Controller$/,'')
     self.action     = payload[:action]
     self.path       = payload[:path]
     self.method     = payload[:method]
@@ -44,12 +45,13 @@ class Entry
 
   def finalize(event)
     set_values(event)
+    self.finished = true
     flush! unless error?
   end
 
   def to_json
     methods = [:controller, :action, :path, :method, :format,
-               :error, :duration, :id, :backtrace]
+               :error, :duration, :id, :backtrace, :finished]
     result = {}
     methods.each do |method|
       result[method] = self.send(method)
