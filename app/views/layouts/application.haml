@@ -2,10 +2,14 @@
 %html
   %head
     %title Rubyception
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    .content
-      = yield
+    .container
+      .wrapper
+        .content_wrap
+          .content
+            = yield
+        .column
+          filters

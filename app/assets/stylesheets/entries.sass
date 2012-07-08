@@ -1,0 +1,75 @@
+.entry
+  :position relative
+  +box-shadow(rgba(255, 255, 255, 0.07) 0 1px 0)
+  :border
+    :bottom 1px solid rgb(18, 18, 18)
+  :font-size 14px
+  :color rgb(195,195,195)
+  :margin
+    :bottom 1px
+  .marker
+    :position absolute
+    :height 100%
+    :float left
+    :width 3px
+    +border-radius(3px)
+    :margin
+      :right 5px
+  .marker.good
+    :background rgb(50,250,100)
+  .marker.warning
+    :background rgb(250,250,100)
+  .marker.error
+    :background rgb(250,50,0)
+  .details
+    :padding 10px
+    .method, .format
+      :text-transform uppercase
+    .heading
+      div
+        :display inline-block
+      .ms, .datetime
+        :float right
+        :margin
+          :left 10px
+      .ms.slow
+        :color rgb(250,50,0)
+      .ms.normal
+        :color rgb(250,250,100)
+      .ms.fast
+        :color rgb(50,250,100)
+      .datetime
+        :color rgb(120,120,120)
+  .lines, .backtrace_lines
+    :display none
+  &.selected
+    :background rgb(55,55,55)
+  &.open
+    .lines, .backtrace_lines
+      :display block
+      :font-family 'Menlo'
+      :margin
+        :top 5px
+      :background rgb(32, 32, 32)
+      +box-shadow(rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset)
+    .line, .backtrace_line
+      .line
+        :font-size 11px
+    .lines
+      .line
+        .num,.msg
+          :display inline-block
+          :padding 1px 5px
+        .msg
+          :padding
+            :left 1px
+        .num
+          :background rgb(0,0,0)
+      .line:first-child
+        div
+          :padding
+            :top 5px
+      .line:last-child
+        div
+          :padding
+            :bottom 5px
