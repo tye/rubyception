@@ -10,6 +10,8 @@ class Entry
   attr_accessor :params
   attr_accessor :backtrace
   attr_accessor :finished
+  attr_accessor :start_time
+  attr_accessor :end_time
 
   def initialize(event)
     set_values event
@@ -18,7 +20,7 @@ class Entry
 
   def set_values event
     payload = event.payload
-    self.controller = payload[:controller].gsub(/Controller$/,'')
+    self.controller = payload[:controller].gsub(/Controller$/,'').downcase.underscore
     self.action     = payload[:action]
     self.path       = payload[:path]
     self.method     = payload[:method]
@@ -27,6 +29,8 @@ class Entry
     self.duration   = event.duration
     self.id         = event.transaction_id
     self.params     = payload[:params]
+    self.start_time = event.time.to_s(:entry)
+    self.end_time   = event.end.to_s(:entry)
   end
 
   def error?; error; end
@@ -51,13 +55,14 @@ class Entry
 
   def to_json
     methods = [:controller, :action, :path, :method, :format,
-               :error, :duration, :id, :backtrace, :finished]
+               :error, :duration, :id, :backtrace, :finished,
+               :start_time, :end_time]
     result = {}
     methods.each do |method|
       result[method] = self.send(method)
     end
 
-    result = {event: result, lines: @lines}
+    result = result.merge(lines: @lines)
 
     result.to_json
   end
