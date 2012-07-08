@@ -23,7 +23,7 @@ class Entry
     self.path       = payload[:path]
     self.method     = payload[:method]
     self.format     = payload[:format]
-    self.error  = payload[:exception].present?
+    self.error      = payload[:exception].present?
     self.duration   = event.duration
     self.id         = event.transaction_id
     self.params     = payload[:params]
@@ -37,9 +37,9 @@ class Entry
 
   def exception(exception)
     self.backtrace = {
-      name: exception.class.name,
+      name:    exception.class.name,
       message: exception.message,
-      lines: exception.backtrace }
+      lines:   exception.backtrace }
     flush!
   end
 
