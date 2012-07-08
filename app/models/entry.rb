@@ -4,45 +4,60 @@ class Entry
   attr_accessor :path
   attr_accessor :method
   attr_accessor :format
-  attr_accessor :exception
+  attr_accessor :error
   attr_accessor :duration
   attr_accessor :id
+  attr_accessor :params
+  attr_accessor :backtrace
 
   def initialize(event)
-    ::Rails.logger.info "Start With #{event.inspect}"
-    payload = event.payload
-
-    self.controller = payload[:controller]
-    self.action = payload[:action]
-    self.path = payload[:path]
-    self.method = payload[:method]
-    self.format = payload[:format]
-    self.exception = payload[:exception].present?
-    self.duration = payload[:duration]
-    self.id = payload[:transaction_id]
-    self.params = payload[:params]
-
+    set_values event
     @lines = []
   end
 
-  def <<(line)
-    ::Rails.logger.info line.inspect
-    @lines << line
+  def set_values event
+    payload = event.payload
+    self.controller = payload[:controller]
+    self.action     = payload[:action]
+    self.path       = payload[:path]
+    self.method     = payload[:method]
+    self.format     = payload[:format]
+    self.error  = payload[:exception].present?
+    self.duration   = event.duration
+    self.id         = event.transaction_id
+    self.params     = payload[:params]
+  end
+
+  def error?; error; end
+
+  def <<(event)
+    @lines << Line.new(event)
+  end
+
+  def exception(exception)
+    self.backtrace = {
+      name: exception.class.name,
+      message: exception.message,
+      lines: exception.backtrace }
+    flush!
   end
 
   def finalize(event)
-    ::Rails.logger.info "Finalize with #{event.inspect}"
-    flush!
+    set_values(event)
+    flush! unless error?
   end
 
   def to_json
     methods = [:controller, :action, :path, :method, :format,
-               :exception, :duration, :id]
+               :error, :duration, :id, :backtrace]
     result = {}
     methods.each do |method|
       result[method] = self.send(method)
     end
-    {event: result}.to_json
+
+    result = {event: result, lines: @lines}
+
+    result.to_json
   end
 
   def flush!
