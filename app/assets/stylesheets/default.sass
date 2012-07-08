@@ -1,0 +1,87 @@
+*
+  +box-sizing(border-box)
+
+html, body, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+  :margin 0px
+  :padding 0px
+  :border 0
+  :font-size 100%
+  :font inherit
+  :vertical-align baseline
+  :font-family Helvetica, arial sans-serif
+  :outline none
+
+html,body
+  :background rgb(47, 47, 47)
+  :padding 5px
+.clear
+  :clear both
+.entry
+  :position relative
+  +box-shadow(rgba(255, 255, 255, 0.07) 0 1px 0)
+  :border-bottom 1px solid rgb(18, 18, 18)
+  :font-size 14px
+  :color rgb(195,195,195)
+  :margin
+    :bottom 1px
+  .marker
+    :position absolute
+    :height 100%
+    :float left
+    :width 3px
+    +border-radius(3px)
+    :margin
+      :right 5px
+  .marker.good
+    :background rgb(50,250,100)
+  .marker.warning
+    :background rgb(250,250,100)
+  .marker.error
+    :background rgb(250,50,0)
+  .details
+    :padding 10px
+    .method, .format
+      :text-transform uppercase
+    .heading
+      div
+        :display inline-block
+      .ms, .datetime
+        :float right
+        :margin
+          :left 10px
+      .ms.slow
+        :color rgb(250,50,0)
+      .ms.normal
+        :color rgb(250,250,100)
+      .ms.fast
+        :color rgb(50,250,100)
+      .datetime
+        :color rgb(120,120,120)
+  .lines
+    :display none
+  &.open
+    .lines
+      :display block
+      :font-family 'Menlo'
+      :margin
+        :top 5px
+      :background rgb(32, 32, 32)
+      +box-shadow(rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset)
+      .line
+        :font-size 11px
+        .num,.txt
+          :display inline-block
+          :padding 1px 5px
+        .txt
+          :padding
+            :left 1px
+        .num
+          :background rgb(0,0,0)
+      .line:first-child
+        .num,.txt
+          :padding
+            :top 5px
+      .line:last-child
+        .num,.txt
+          :padding
+            :bottom 5px

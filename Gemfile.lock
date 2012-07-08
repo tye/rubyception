@@ -31,6 +31,7 @@ GEM
     addressable (2.2.8)
     arel (3.0.2)
     builder (3.0.0)
+    chunky_png (1.2.5)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -38,6 +39,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     em-websocket (0.3.6)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
@@ -45,6 +52,7 @@ GEM
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fssm (0.2.9)
     haml (3.1.6)
     hike (1.2.1)
     i18n (0.6.0)
@@ -110,13 +118,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-rails
+  coffee-rails (~> 3.2.1)
+  compass-rails
   em-websocket
   haml
   jenny
   jquery-rails
   rails (= 3.2.6)
   sass
-  sass-rails
+  sass-rails (~> 3.2.3)
   sqlite3
-  uglifier
+  uglifier (>= 1.0.3)

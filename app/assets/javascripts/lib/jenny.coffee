@@ -13,7 +13,7 @@ ViewHelpers=
     $(@el).trigger event
   bind_render:->
     _.bindAll        @      , 'render'
-    @collection.bind 'add'  , @render
+    @collection.bind 'add'  , @add
     @collection.bind 'reset', @render
   validate:->
     Backbone.Validation.bind @,
@@ -160,7 +160,6 @@ BackboneHelpers =
     else
       "/api/#{name}"
     klass      = name.camelize()
-    console.log klass
     has_model  = options['model'] isnt undefined
     model_name = if has_model
       model_name = options['model']
@@ -171,13 +170,18 @@ BackboneHelpers =
       model_name.camelize()
     else
       klass.singularize()
-    @collection               = new App.Collections[klass]
-    result_model = @result_model || "#{model_name}Result"
-    if App.Models[result_model]
-      @collection.results_model = new App.Models[result_model]()
-      @collection.results_model.collection = @collection
-    @collection.model         = App.Models[model_name]
-    @collection.url           = url
+    @collection = if @options.collection
+      collection = options['collection']
+      delete options['collection']
+      collection
+    else
+      new App.Collections[klass]
+      result_model = @result_model || "#{model_name}Result"
+      if App.Models[result_model]
+        @collection.results_model = new App.Models[result_model]()
+        @collection.results_model.collection = @collection
+      @collection.model         = App.Models[model_name]
+      @collection.url           = url
     @collection.name          = name
     options                 ||= {}
     options.collection        = @collection

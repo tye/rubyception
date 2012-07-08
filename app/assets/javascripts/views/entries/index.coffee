@@ -1,6 +1,9 @@
 class App.Views.Entries.Index extends Backbone.View
   initialize: ->
     @bind_render()
-  render: ->
-    console.log 'RENDER ENTIRS INDEx'
+  render:=>
     @collection.collect()
+  add:(model)=>
+    e = @partial null, 'entries/entry',
+        model: model
+    $(@el).append e.el
