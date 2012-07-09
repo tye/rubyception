@@ -22,28 +22,25 @@ class App.Routers.Log extends Backbone.Router
       @collection.add data
   default: ->
     @index()
+  toggle_side: =>
+    $('.wrapper').toggleClass 'filter'
   hotkeys: ->
-    console.log 'HPTKEYS'
-    doc = $(document)
-    Mousetrap.bind 'down', @collection.selection_down
-    Mousetrap.bind 'up', @collection.selection_up
-    for i in [0..9]
-      Mousetrap.bind String(i), _.bind @store_number_hotkey, @, String(i)
-    Mousetrap.bind 'o', @collection.open_selected
-      
-    Mousetrap.bind 'shift+g', =>
-      @go_to_entry_or('bottom')
-    Mousetrap.bind 'g g', =>
-      @go_to_entry_or('top')
+    m = Mousetrap
+    m.bind '\\ n'       , @toggle_side
+    m.bind ['j','down'] , @collection.selection_down
+    m.bind ['k','up']   , @collection.selection_up
+    m.bind String(i)    , _.bind @store_number_hotkey, @, String(i) for i in [0..9]
+    m.bind 'o'          , @collection.open_selected
+    m.bind 'shift+g'    , _.bind @go_to_entry_or, @, 'bottom'
+    m.bind 'g g'        , _.bind @go_to_entry_or, @, 'top'
   store_number_hotkey: (i) =>
     @number_hotkey ||= ''
-    @number_hotkey += i
-    console.log @number_hotkey, i
+    @number_hotkey  += i
   go_to_entry_or: (location) =>
-    console.log 'CONSUME', @number_hotkey
     if @number_hotkey && @number_hotkey != ''
-      if @collection.models[@number_hotkey - 1]
-        @collection.select_model @number_hotkey - 1
+      go_to = @number_hotkey - 1
+      if @collection.models[go_to]
+        @collection.select_model go_to
     else if @collection.models.length > 0
       if location == 'top'
         @collection.select_model 0

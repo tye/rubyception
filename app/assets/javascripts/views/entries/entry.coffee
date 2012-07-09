@@ -1,7 +1,7 @@
 class App.Views.Entries.Entry extends Backbone.View
   className: 'entry'
   events:
-    'click': 'toggle'
+    'click': 'select_and_toggle'
   initialize: ->
     @model.bind 'change', @render
     @model.bind 'unselect', @unselect
@@ -10,6 +10,9 @@ class App.Views.Entries.Entry extends Backbone.View
     @render()
   select: =>
     $(@el).addClass 'selected'
+  select_and_toggle: =>
+    @select()
+    @toggle()
   unselect: =>
     $(@el).removeClass 'selected'
   render: =>
@@ -37,5 +40,5 @@ class App.Views.Entries.Entry extends Backbone.View
     else                   'slow'
     e = $(@el).find '.ms'
     e.addClass c
-  toggle:->
+  toggle:=>
     $(@el).toggleClass 'open'

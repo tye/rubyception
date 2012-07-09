@@ -6,7 +6,7 @@ class App.Collections.Entries extends Backbone.Collection
     @selected_index = -1
     if @models.length > 0
       @select_model @selected_index
-  open_selection: (n) =>
+  open_selected: =>
     @selected_model.trigger 'open' if @selected_model
   select_model: (n) =>
     @selected_model.trigger 'unselect' if @selected_model
