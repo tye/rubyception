@@ -1,4 +1,5 @@
 class App.Views.BacktraceLines.BacktraceLine extends Backbone.View
+  tagName  : 'tr'
   className: 'backtrace_line'
   initialize:->
     @render()

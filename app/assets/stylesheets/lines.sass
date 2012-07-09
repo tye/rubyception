@@ -1,0 +1,25 @@
+.lines
+  :font-family 'Menlo'
+  :margin
+    :top 5px
+  :background rgb(32, 32, 32)
+  +box-shadow(rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset)
+  .line
+    :font-size 11px
+    .num,.msg
+      :display inline-block
+      :padding 1px 5px
+    .msg
+      :padding
+        :left 1px
+    .num
+      :text-align right
+      :background rgb(0,0,0)
+  .line:first-child
+    div
+      :padding
+        :top 5px
+  .line:last-child
+    div
+      :padding
+        :bottom 5px

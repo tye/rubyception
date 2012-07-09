@@ -1,4 +1,5 @@
 %td.num  {{num}}
-%td.msg  {{msg}}
+%td.msg= link_to '{{msg}}', "mvim://open/?url=file://~/.bash_profile&line={{num}}&column=1"
 %td.lnum {{line_num}}
-%td.in   {{in}}
+%td.in
+  %span {{in}}
