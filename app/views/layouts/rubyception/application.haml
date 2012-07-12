@@ -1,0 +1,15 @@
+!!! 5
+%html
+  %head
+    %title Rubyception
+    = stylesheet_link_tag    'rubyception/application', :media => 'all'
+    = javascript_include_tag 'rubyception/application'
+    = csrf_meta_tags
+  %body
+    .container
+      .wrapper
+        .content_wrap
+          .content
+            = yield
+        .column
+          filters

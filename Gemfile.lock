@@ -1,5 +1,17 @@
+PATH
+  remote: .
+  specs:
+    rubyception (0.0.1)
+      coffee-script
+      compass
+      em-websocket
+      haml
+      jenny
+      rails (~> 3.2.6)
+      sass
+
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
@@ -32,9 +44,6 @@ GEM
     arel (3.0.2)
     builder (3.0.0)
     chunky_png (1.2.5)
-    coffee-rails (3.2.2)
-      coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -43,8 +52,6 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
     em-websocket (0.3.6)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
@@ -95,10 +102,6 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     sass (3.1.20)
-    sass-rails (3.2.5)
-      railties (~> 3.2.0)
-      sass (>= 3.1.10)
-      tilt (~> 1.3)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -110,22 +113,11 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
-    uglifier (1.2.6)
-      execjs (>= 0.3.0)
-      multi_json (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-rails (~> 3.2.1)
-  compass-rails
-  em-websocket
-  haml
-  jenny
   jquery-rails
-  rails (= 3.2.6)
-  sass
-  sass-rails (~> 3.2.3)
+  rubyception!
   sqlite3
-  uglifier (>= 1.0.3)

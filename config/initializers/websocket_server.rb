@@ -1,9 +1,11 @@
-require 'websocket_server'
-WebsocketServer.sockets = []
-::Rails.logger.auto_flushing = true
-WebsocketServer.new
+require 'rubyception/websocket_server'
+require 'rubyception/subscriber'
+require 'rubyception/catcher'
 
-require 'subscriber'
+::Rails.logger.auto_flushing = true
+Rubyception::WebsocketServer.sockets = []
+Rubyception::WebsocketServer.new
+
 attach_to = [
   :action_controller,
   :action_view,
@@ -11,8 +13,7 @@ attach_to = [
   :action_mailer
 ]
 attach_to.each do |notification|
-  ::Rubyception::Subscriber.attach_to notification
+  Rubyception::Subscriber.attach_to notification
 end
 
-require 'catcher'
-::ActionDispatch::DebugExceptions.send(:include,ExceptionsCatcher)
+::ActionDispatch::DebugExceptions.send(:include,Rubyception::ExceptionsCatcher)
