@@ -36,16 +36,7 @@ class Entry
   def error?; error; end
 
   def <<(event)
-    params    = event.payload
-    duration  = event.duration
-    hook,kind = event.name.split '.'
-    hook      = hook.sub /\?/, ''
-    data = {
-      kind:     kind,
-      hook:     hook,
-      duration: duration }
-    data.merge! params
-    @lines << data
+    @lines << Line.new(event).attrs
   end
 
   def exception(exception)
