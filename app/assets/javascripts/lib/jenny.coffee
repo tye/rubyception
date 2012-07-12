@@ -63,9 +63,10 @@ CollectionHelpers =
 
     ti   = options.template_index
     delete options.template_index
-    template_index = "#{@name}/index"
-    html  = @context.template template_index, {}
-    html  = @context.template ti            , {} if ti isnt undefined
+    template_index = ti
+    template_index = "#{@name}/index" if ti is undefined
+    e
+    html = @context.template template_index, {}
 
     hti  = options.has_template_index
     delete options.has_template_index
@@ -79,7 +80,10 @@ CollectionHelpers =
     selector = e.find(find) if has_find
     primer   =  options.primer || template_index
     selector.html ''
-    if @length == 0
+
+    p = options.primer
+    delete options.primer
+    if @length == 0 && p
       html = @context.template "#{primer}_primer", {}
       e.html html
     else

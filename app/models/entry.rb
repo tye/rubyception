@@ -19,7 +19,7 @@ class Entry
   end
 
   def set_values event
-    payload = event.payload
+    payload         = event.payload
     self.controller = payload[:controller].gsub(/Controller$/,'').downcase.underscore
     self.action     = payload[:action]
     self.path       = payload[:path]
@@ -29,14 +29,23 @@ class Entry
     self.duration   = event.duration
     self.id         = event.transaction_id
     self.params     = payload[:params]
-    self.start_time = event.time.to_s(:entry)
-    self.end_time   = event.end.to_s(:entry)
+    self.start_time = event.time.to_s :entry
+    self.end_time   = event.end.to_s  :entry
   end
 
   def error?; error; end
 
   def <<(event)
-    @lines << Line.new(event)
+    params    = event.payload
+    duration  = event.duration
+    hook,kind = event.name.split '.'
+    hook      = hook.sub /\?/, ''
+    data = {
+      kind:     kind,
+      hook:     hook,
+      duration: duration }
+    data.merge! params
+    @lines << data
   end
 
   def exception(exception)
@@ -47,11 +56,11 @@ class Entry
       parts = l.match(%r{^(#{Regexp.quote(::Rails.root.to_s)})?(.*):(\d+):in `(.*?)'$})
       x += 1
       {
-        num: x,
-        msg: parts[2],
+        num:      x,
+        msg:      parts[2],
         app_path: parts[1],
         line_num: parts[3],
-        in: parts[4]
+        in:       parts[4]
       }
     end
 
@@ -69,16 +78,24 @@ class Entry
   end
 
   def to_json
-    methods = [:controller, :action, :path, :method, :format,
-               :error, :duration, :id, :backtrace, :finished,
-               :start_time, :end_time]
+    methods = %w{controller
+                 action
+                 path
+                 method
+                 format
+                 error
+                 duration
+                 id
+                 backtrace
+                 finished
+                 start_time
+                 end_time}
     result = {}
     methods.each do |method|
-      result[method] = self.send(method)
+      method         = method.to_sym
+      result[method] = self.send method
     end
-
-    result = result.merge(lines: @lines)
-
+    result = result.merge lines: @lines
     result.to_json
   end
 

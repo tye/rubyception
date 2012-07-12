@@ -20,12 +20,19 @@ class App.Views.Entries.Entry extends Backbone.View
     @color_ms()
     @color_marker()
     @backtrace()
+    @lines()
   backtrace:->
     backtrace = @model.get 'backtrace'
     if backtrace
       el = $(@el).find '.backtrace_lines'
       @collect 'backtrace_lines', el: el
       @collection.reset backtrace.lines
+  lines:->
+    lines = @model.get 'lines'
+    if lines
+      el = $(@el).find '.lines'
+      @collect 'lines', el: el
+      @collection.reset lines
   color_marker:->
     backtrace = @model.get 'backtrace'
     c =  if backtrace then 'error'

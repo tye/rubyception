@@ -19,16 +19,22 @@ class Templating
   end
 
   def self.process_tree template, key=nil, current=''
-    current = current == '' ? current = key.to_s : current = current+"/#{key}"
-    if template.is_a?(Hash)
-      template.each{|k,v|self.process_tree(v,k,current)}
-    elsif template.is_a?(Array)
-      self.append_to_tree template, current
+    path = "#{current}/#{key}"
+    path = key.to_s if current == ''
+    kind = template.class.to_s
+    case kind
+    when 'Hash'
+      template.each do |k,v|
+        self.process_tree v, k, path
+      end
+    when 'Array'
+      self.append_to_tree template, path
     end
   end
 
   def self.compile
-    file           = File.open(Rails.root.join('config','templating.yml'))
+    yml            = Rails.root.join 'config','templating.yml'
+    file           = File.open yml
     templates      = YAML::load file
     @@templates    = templates
     self.process_tree templates

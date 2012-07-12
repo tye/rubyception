@@ -3,7 +3,7 @@ module Rubyception
     INTERNAL_PARAMS = %w(controller action format _method only_path)
 
     # ActionController
-    
+
     def start_processing(event)
       WebsocketServer.start event
     end
@@ -14,11 +14,11 @@ module Rubyception
 
     # http://edgeguides.rubyonrails.org/active_support_instrumentation.html#render_partial-
     [
-      :render_template, # identifier (template name), layout
-      :render_partial, # identifier
-      :sql, # sql (the query), name (ie SELECT, DELETE ...)
-      :deliver, # mailer (Mailer class), message_id, subject, to, from, bcc, cc, date, mail (message contents)
-      :redirect_to, # status (http status), location
+      :render_template, # identifier (template name)             , layout
+      :render_partial , # identifier
+      :sql            , # sql (the query)                        , name (ie SELECT, DELETE ...)
+      :deliver        , # mailer (Mailer class)                  , message_id     , subject    , to, from, bcc, cc, date, mail (message contents)
+      :redirect_to    , # status (http status)                   , location
       :halted_callback, # filter (method name where chain halted)
 
     ].each do |name|

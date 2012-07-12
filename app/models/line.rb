@@ -8,12 +8,4 @@ class Line
     self.params   = event.payload
     self.duration = event.duration
   end
-
-  def to_json
-    {
-      event:    event,
-      params:   params,
-      duration: duration
-    }.to_json
-  end
 end

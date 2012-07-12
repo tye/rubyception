@@ -60,7 +60,6 @@ class App.Routers.Log extends Backbone.Router
       format     : 'html'
       duration   : '255'
       start_time : '2012-05-05 15:13:12'
-      lines      : [{name:1},{name:2}]
     entry_2 =
       id         : 2
       controller : 'tasks'
@@ -70,5 +69,4 @@ class App.Routers.Log extends Backbone.Router
       format     : 'json'
       duration   : '1023'
       start_time : '2012-05-05 15:13:12'
-      lines      : [{name:1},{name:2}]
     @collection.reset [entry_1,entry_2]

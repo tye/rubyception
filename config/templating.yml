@@ -4,6 +4,37 @@ entries:
 backtrace_lines:
   - index
   - backtrace_line
+#lines:
+  #- index
 lines:
-  - index
-  - line
+  action_controller:
+  - write_fragment
+  - read_fragment
+  - expire_fragment
+  - exist_fragment
+  - write_page
+  - expire_page
+  - start_processing
+  - process_action
+  - send_file
+  - send_data
+  - redirect_to
+  - halted_callback
+  action_view:
+    - render_template
+    - render_partial
+  active_record:
+    - sql
+    - identity
+  action_mailer:
+    - receive
+    - deliver
+  active_resource:
+    - request
+  active_support:
+    - cache_read
+    - cache_generate
+    - cache_fetch_hit
+    - cache_write
+    - cache_delete
+    - cache_exist
