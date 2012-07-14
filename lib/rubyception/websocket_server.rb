@@ -21,9 +21,7 @@ class Rubyception::WebsocketServer
         host: '0.0.0.0',
         port: 3030 }
       EventMachine::WebSocket.start(options) do |ws|
-        puts ws.inspect
         ws.onopen do
-          ws.send "Hello Client"
           Rubyception::WebsocketServer.sockets << ws
         end
       end

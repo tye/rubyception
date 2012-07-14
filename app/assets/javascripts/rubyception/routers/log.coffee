@@ -15,11 +15,16 @@ class App.Routers.Log extends Backbone.Router
   onclose:  (msg)=> console.log 'Socket onclose'
   onmessage:(msg)=>
     data = JSON.parse msg.data
-    console.log data
     if data.finished
-      model = _.last @collection.models
-      model.save data
+      @finished = data
     else
+      @started = data
+
+    if @started && @finished
+      data = @finished
+      delete data.id
+      @started  = false
+      @finished = false
       @collection.add data
   default: ->
     @index()
