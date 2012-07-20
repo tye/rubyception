@@ -17,6 +17,8 @@ class App.Routers.Log extends Backbone.Router
     data = JSON.parse msg.data
     if data.finished
       @finished = data
+      #model = _.last @collection.models
+      #model.set data
     else
       @started = data
 
@@ -57,22 +59,3 @@ class App.Routers.Log extends Backbone.Router
     @hotkeys()
     @partial '.content', 'logs/show',
       collection: @collection
-    entry_1 =
-      id         : 1
-      controller : 'projects'
-      action     : 'index'
-      path       : '/all_projects'
-      method     : 'get'
-      format     : 'html'
-      duration   : '255'
-      start_time : '2012-05-05 15:13:12'
-    entry_2 =
-      id         : 2
-      controller : 'tasks'
-      action     : 'show'
-      path       : '/tasks/164/show'
-      method     : 'get'
-      format     : 'json'
-      duration   : '1023'
-      start_time : '2012-05-05 15:13:12'
-    @collection.reset [entry_1,entry_2]
