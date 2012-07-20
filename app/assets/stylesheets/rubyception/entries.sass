@@ -24,10 +24,11 @@
   .marker.error
     :background rgb(250,50,0)
   .details
-    :padding 10px
+    :padding 0 10px
     .method, .format
       :text-transform uppercase
     .heading
+      :padding 10px 0 10px 0
       div
         :display inline-block
       .ms, .datetime
@@ -49,7 +50,8 @@
   &.open
     .lines, .backtrace_lines
       :display block
+    :padding-bottom 10px
 .position_marker
   :background rgb(255,0,0)
   :height 2px
-  :margin 0 2px
+  :margin 2px 0
