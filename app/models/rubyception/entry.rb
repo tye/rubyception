@@ -42,7 +42,7 @@ class Rubyception::Entry
   def ignore_event?(event)
     payload = event.payload
     case
-    when event.name == :active_record_sql && payload.name == 'SCHEMA'
+    when event.name == 'sql.active_record' && payload[:name] == 'SCHEMA'
       # SCHEMA sql are things like SHOW TABLES, DESCRIBE USERS
       true
     else
