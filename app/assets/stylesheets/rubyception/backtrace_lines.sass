@@ -8,6 +8,17 @@
   +box-shadow(rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset)
   table
     :border-collapse collapse
+  th.exception
+    :text-align left
+    :padding 5px
+    :font-size 12px
+  th.toggle_rails
+    :text-align center
+    :padding 5px
+    a
+      :text-decoration none
+      :font-size 12px
+      :color rgb(255,255,255)
   .backtrace_line
     :font-size 12px
     td
@@ -30,6 +41,7 @@
       :background rgb(0,0,0)
       :width 1%
     .lnum
+      :text-align right
       :width 1%
       :padding 0px 5px
     .in

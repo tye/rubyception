@@ -1,5 +1,7 @@
 %table
   %thead
-    %th{colspan: 4}
+    %th.toggle_rails
       = display_rails_backtrace_lines_link
+    %th.exception{colspan: 3}
+      {{name}}: {{message}}
   %tbody

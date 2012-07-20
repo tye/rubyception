@@ -62,6 +62,7 @@ class Rubyception::Entry
         app_path: parts[1],
         line_num: parts[3],
         in:       parts[4],
+        url:      CGI.escape("file://#{parts[1]}#{parts[2]}"),
         rails:    !parts[1]
       }
     end

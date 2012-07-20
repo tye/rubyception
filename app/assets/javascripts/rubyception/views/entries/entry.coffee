@@ -1,14 +1,13 @@
 class App.Views.Entries.Entry extends Backbone.View
   className: 'entry'
   events:
-    'click .details': 'select_and_toggle'
+    'click': 'select_and_toggle'
   initialize: ->
     @render()
   select_and_toggle: (event) =>
-    console.log target
     target = $ event.target
-    console.log target
-    return unless target.hasClass('details') or target.hasClass('heading')
+    # Return unless we clicked directory on .details, or .heading, or a child of .heading
+    return unless target.hasClass('details') or target.closest('.heading').length > 0 or target.hasClass('entry')
     unless $(@el).hasClass 'selected'
       @index.entry $ @el
     @index.toggle_open()
@@ -25,8 +24,8 @@ class App.Views.Entries.Entry extends Backbone.View
       el = $(@el).find '.backtrace_lines'
       @collect 'backtrace_lines',
         el: el
-        name: 'Test'
-        message: "ERROR"
+        name: backtrace.name
+        message: backtrace.message
       @collection.reset backtrace.lines
   lines:->
     lines = @model.get 'lines'
