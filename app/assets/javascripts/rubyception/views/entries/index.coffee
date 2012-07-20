@@ -5,5 +5,7 @@ class App.Views.Entries.Index extends Backbone.View
     @collection.collect()
   add:(model)=>
     e = @partial null, 'entries/entry',
-        model: model
+        collection: @collection,
+        model: model,
+        index: @
     $(@el).append e.el
