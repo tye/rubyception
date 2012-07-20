@@ -13,3 +13,5 @@
 #= require_tree ./collections
 #= require_tree ./models
 #= require rubyception/app
+#= require rubyception/shCore
+#= require rubyception/shBrushSql
