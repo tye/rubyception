@@ -6,7 +6,7 @@ class Rubyception::Line
   def initialize(event)
     self.event    = event.name
     self.params   = event.payload
-    self.duration = event.duration
+    self.duration = event.duration.to_f.round(2)
   end
 
   def attrs

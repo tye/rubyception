@@ -26,7 +26,7 @@ class Rubyception::Entry
     self.method     = payload[:method]
     self.format     = payload[:format]
     self.error      = payload[:exception].present?
-    self.duration   = event.duration
+    self.duration   = event.duration.to_f.round(2)
     self.id         = event.transaction_id
     self.params     = payload[:params]
     self.start_time = event.time.to_s :entry
