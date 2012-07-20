@@ -5,3 +5,4 @@ class App.Views.BacktraceLines.BacktraceLine extends Backbone.View
     @render()
   render:->
     @el_template 'backtrace_lines/backtrace_line'
+    $(@el).addClass 'rails' if @model.get('rails')

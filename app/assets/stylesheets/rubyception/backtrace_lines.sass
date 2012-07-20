@@ -15,6 +15,7 @@
     .num,.msg
       :padding 1px 5px
     .msg
+      :white-space nowrap
       :text-align right
       :padding
         :left 5px
@@ -32,6 +33,7 @@
       :width 1%
       :padding 0px 5px
     .in
+      :width 100%
       :color rgb(150,150,150)
       //span
         //:display inline-block
@@ -45,3 +47,8 @@
     td
       :padding
         :bottom 5px
+  .rails
+    :display none
+  &.display_rails
+    .rails
+      :display table-row

@@ -3,4 +3,3 @@ class App.Views.BacktraceLines.Index extends Backbone.View
     @bind_render()
   render: =>
     @collection.collect 'tbody'
-
