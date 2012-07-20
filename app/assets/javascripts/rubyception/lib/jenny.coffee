@@ -66,7 +66,7 @@ CollectionHelpers =
     template_index = ti
     template_index = "#{@name}/index" if ti is undefined
     e
-    html = @context.template template_index, {}
+    html = @context.template template_index, options.args || {}
 
     hti  = options.has_template_index
     delete options.has_template_index
