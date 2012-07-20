@@ -55,6 +55,7 @@ class Rubyception::Entry
     x = 0
     lines = lines.collect do |l|
       parts = l.match(%r{^(#{Regexp.quote(::Rails.root.to_s)}/)?(.*):(\d+):in `(.*?)'$})
+      next unless parts
       x += 1
       {
         num:      x,
