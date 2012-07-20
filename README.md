@@ -25,9 +25,9 @@ must be using a browser that supports Websockets.
 `up` or `k` Move selection up<br>
 `down` or `j` Move selection down<br>
 `enter` Expand selected entry<br>
-`G` Go to last enter<br>
-`gg` Go to first enter<br>
-`42gg` or `42G` Go to line 42<br>
+`G` Go to last entry<br>
+`gg` Go to first entry<br>
+`42gg` or `42G` Go to 42nd entry<br>
 
 ## Features
 * Real-time updating of the log file using Websocket
