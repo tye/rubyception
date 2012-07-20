@@ -10,9 +10,6 @@ class App.Routers.Log extends Backbone.Router
     @collection       = new App.Collections.Entries()
     @collection.model = App.Models.Entry
     @default()
-  onopen:        => console.log 'Socket onopen'
-  onerror:       => console.log 'Socket onerror'
-  onclose:  (msg)=> console.log 'Socket onclose'
   onmessage:(msg)=>
     data = JSON.parse msg.data
     if data.finished
@@ -27,35 +24,23 @@ class App.Routers.Log extends Backbone.Router
       delete data.id
       @started  = false
       @finished = false
-      @collection.add data
+      for i in [0..100]
+        @collection.add data
   default: ->
     @index()
   toggle_side: =>
     $('.wrapper').toggleClass 'filter'
-  hotkeys: ->
+  hotkeys: =>
     m = Mousetrap
     m.bind '\\ n'       , @toggle_side
-    m.bind ['j','down'] , @collection.selection_down
-    m.bind ['k','up']   , @collection.selection_up
-    m.bind String(i)    , _.bind @store_number_hotkey, @, String(i) for i in [0..9]
+    m.bind ['j','down'] , @log.entries_index.down
+    m.bind ['k','up']   , @log.entries_index.up
+    m.bind String(i)    , _.bind @log.entries_index.number_hotkey, @, String(i) for i in [0..9]
     m.bind 'o'          , @collection.open_selected
-    m.bind 'shift+g'    , _.bind @go_to_entry_or, @, 'bottom'
-    m.bind 'g g'        , _.bind @go_to_entry_or, @, 'top'
-  store_number_hotkey: (i) =>
-    @number_hotkey ||= ''
-    @number_hotkey  += i
-  go_to_entry_or: (location) =>
-    if @number_hotkey && @number_hotkey != ''
-      go_to = @number_hotkey - 1
-      if @collection.models[go_to]
-        @collection.select_model go_to
-    else if @collection.models.length > 0
-      if location == 'top'
-        @collection.select_model 0
-      else if location == 'bottom'
-        @collection.select_model @collection.models.length - 1
-    @number_hotkey = ''
-  index: ->
+    m.bind 'shift+g'    , _.bind @log.entries_index.goto_number, @, 'bottom'
+    m.bind 'g g'        , _.bind @log.entries_index.goto_number, @, 'top'
+    m.bind 'enter'      , @log.entries_index.toggle_open
+  index: =>
+    @log = @partial '.content', 'logs/show',
+             collection: @collection
     @hotkeys()
-    @partial '.content', 'logs/show',
-      collection: @collection

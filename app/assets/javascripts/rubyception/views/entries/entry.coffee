@@ -3,28 +3,11 @@ class App.Views.Entries.Entry extends Backbone.View
   events:
     'click': 'select_and_toggle'
   initialize: ->
-    @model.bind 'change', @render
-    @model.bind 'unselect', @unselect
-    @model.bind 'select', @select
-    @model.bind 'open', @open
-    @model.bind 'close', @close
     @render()
-  select: =>
-    $(@el).addClass 'selected'
   select_and_toggle: =>
-    console.log 'SELECT AND TOGGLE', @entries
-    if $(@el).hasClass 'open'
-      @entries.close_selected()
-    else
-      @entries.select_model @model
-      @entries.open_selected()
-  open: =>
-    $(@el).addClass 'open'
-  close: =>
-    $(@el).removeClass 'open'
-  unselect: =>
-    $(@el).removeClass 'selected'
-    @close()
+    unless $(@el).hasClass 'selected'
+      @index.entry $ @el
+    @index.toggle_open()
   render: =>
     @el_template 'entries/entry'
     @color_ms()
