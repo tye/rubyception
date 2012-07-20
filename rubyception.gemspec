@@ -7,13 +7,13 @@ require "rubyception/version"
 Gem::Specification.new do |s|
   s.name        = "rubyception"
   s.version     = Rubyception::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Rubyception."
-  s.description = "TODO: Description of Rubyception."
+  s.authors     = ["Tye Shavik, Andrew Brown"]
+  s.email       = ["tyeshavik@gmail.com"]
+  s.homepage    = "http://github.com/tye/rubyception"
+  s.summary     = "Realtime Rails log in your browser"
+  s.description = "Realtime Rails log in your browser. For Rails 3.1+"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails'
