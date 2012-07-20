@@ -6,9 +6,19 @@ class App.Collections.Entries extends Backbone.Collection
     @selected_index = -1
     if @models.length > 0
       @select_model @selected_index
+  close_selected: =>
+    @selected_model.trigger 'close' if @selected_model
   open_selected: =>
     @selected_model.trigger 'open' if @selected_model
   select_model: (n) =>
+    # This is kind of messy, but we need to know the numeric index of the model we are selecting
+    if typeof n == 'object'
+      x = 0
+      for model in @models
+        if model == n
+          break
+        x++
+      n = x
     @selected_model.trigger 'unselect' if @selected_model
     @selected_model = @models[n]
     @selected_index = n

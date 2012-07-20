@@ -6,15 +6,25 @@ class App.Views.Entries.Entry extends Backbone.View
     @model.bind 'change', @render
     @model.bind 'unselect', @unselect
     @model.bind 'select', @select
-    @model.bind 'open', @toggle
+    @model.bind 'open', @open
+    @model.bind 'close', @close
     @render()
   select: =>
     $(@el).addClass 'selected'
   select_and_toggle: =>
-    @select()
-    @toggle()
+    console.log 'SELECT AND TOGGLE', @entries
+    if $(@el).hasClass 'open'
+      @entries.close_selected()
+    else
+      @entries.select_model @model
+      @entries.open_selected()
+  open: =>
+    $(@el).addClass 'open'
+  close: =>
+    $(@el).removeClass 'open'
   unselect: =>
     $(@el).removeClass 'selected'
+    @close()
   render: =>
     @el_template 'entries/entry'
     @color_ms()
@@ -47,5 +57,3 @@ class App.Views.Entries.Entry extends Backbone.View
     else                   'slow'
     e = $(@el).find '.ms'
     e.addClass c
-  toggle:=>
-    $(@el).toggleClass 'open'
