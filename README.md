@@ -8,6 +8,10 @@ Add to your gemfile:
 ```ruby
 gem 'rubyception'
 ```
+Run:
+```
+bundle install
+```
 Add to your routes:
 ```ruby
 match 'rubyception' => 'rubyception/application#index'
