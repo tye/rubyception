@@ -24,8 +24,7 @@ class App.Routers.Log extends Backbone.Router
       delete data.id
       @started  = false
       @finished = false
-      for i in [0..100]
-        @collection.add data
+      @collection.add data
   default: ->
     @index()
   toggle_side: =>
