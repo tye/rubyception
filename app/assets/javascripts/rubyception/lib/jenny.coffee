@@ -107,7 +107,7 @@ BackboneHelpers =
   template: (path,data)->
     template = null
     eval "template = Template.#{path.replace(/\//g,'.')}"
-    new throw "template is undefined: Template.#{path.replace(/\//g,'.')}" if template is undefined
+    throw "template is undefined: Template.#{path.replace(/\//g,'.')}" if template is undefined
     Milk.render template, data
 
   # collect
