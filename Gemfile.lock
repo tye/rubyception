@@ -7,7 +7,7 @@ PATH
       em-websocket
       haml
       jenny
-      rails (~> 3.2.6)
+      rails
       sass
 
 GEM
