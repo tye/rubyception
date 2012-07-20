@@ -4,22 +4,21 @@ entries:
 backtrace_lines:
   - index
   - backtrace_line
-#lines:
-  #- index
 lines:
+  index:
   action_controller:
-  - write_fragment
-  - read_fragment
-  - expire_fragment
-  - exist_fragment
-  - write_page
-  - expire_page
-  - start_processing
-  - process_action
-  - send_file
-  - send_data
-  - redirect_to
-  - halted_callback
+    - write_fragment
+    - read_fragment
+    - expire_fragment
+    - exist_fragment
+    - write_page
+    - expire_page
+    - start_processing
+    - process_action
+    - send_file
+    - send_data
+    - redirect_to
+    - halted_callback
   action_view:
     - render_template
     - render_partial

@@ -38,3 +38,5 @@ end
 
 
 task :default => :test
+
+load 'tasks/templates.rake'

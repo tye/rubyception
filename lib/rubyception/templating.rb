@@ -4,10 +4,9 @@
 
 class Rubyception::Templating
   def self.r partial
-    t = TemplatingController.new
+    t = Rubyception::TemplatingController.new
     t.r partial
   end
-
 
   def self.append_to_tree template, current
     keys  = current.split('/').collect{|k|"['#{k}']"}.join
@@ -25,7 +24,11 @@ class Rubyception::Templating
     case kind
     when 'Hash'
       template.each do |k,v|
-        self.process_tree v, k, path
+        if v.nil?
+          self.append_to_tree [k], path
+        else
+          self.process_tree v, k, path
+        end
       end
     when 'Array'
       self.append_to_tree template, path
@@ -33,14 +36,13 @@ class Rubyception::Templating
   end
 
   def self.compile
-    yml            = Rails.root.join 'config','templating.yml'
+    yml            = File.join(File.dirname(__FILE__),'..','..','config','templating.yml')
     file           = File.open yml
     templates      = YAML::load file
     @@templates    = templates
     self.process_tree templates
     js   = "Template = #{@@templates.to_json}"
-    path = Rails.root.join 'app','assets','javascripts','template.js'
+    path = File.join(File.dirname(__FILE__),'..','..','app','assets','javascripts','rubyception','template.js')
     File.open(path,'w'){|f|f.write(js)}
   end
-
 end

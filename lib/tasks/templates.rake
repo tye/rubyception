@@ -1,7 +1,7 @@
-require 'templating'
+require 'rubyception/templating'
 namespace :templates do
   desc 'Compile Haml Templates for Javascript'
   task :compile => :environment do
-    Templating.compile
+    Rubyception::Templating.compile
   end
 end

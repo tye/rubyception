@@ -1,3 +1,4 @@
+require 'jenny'
 class Rubyception::TemplatingController < AbstractController::Base
   include AbstractController::Logger
   include AbstractController::Rendering
@@ -10,12 +11,12 @@ class Rubyception::TemplatingController < AbstractController::Base
   self.view_paths = 'app/views'
   self.assets_dir = 'app/public'
 
-  helper ApplicationHelper,
-         JennyHelper
+  helper Rubyception::ApplicationHelper,
+         ::JennyHelper
 
   public
     def r partial
-      render :partial => partial
+      render :partial => "rubyception/#{partial}"
     end
 
 end
