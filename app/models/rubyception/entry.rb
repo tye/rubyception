@@ -1,17 +1,17 @@
 class Rubyception::Entry
-  attr_accessor :controller
-  attr_accessor :action
-  attr_accessor :path
-  attr_accessor :method
-  attr_accessor :format
-  attr_accessor :error
-  attr_accessor :duration
-  attr_accessor :id
-  attr_accessor :params
-  attr_accessor :backtrace
-  attr_accessor :finished
-  attr_accessor :start_time
-  attr_accessor :end_time
+  attr_accessor :controller,
+                :action,
+                :path,
+                :method,
+                :format,
+                :error,
+                :duration,
+                :id,
+                :params,
+                :backtrace,
+                :finished,
+                :start_time,
+                :end_time
 
   def initialize(event)
     set_values event
@@ -36,11 +36,21 @@ class Rubyception::Entry
   def error?; error; end
 
   def <<(event)
-    @lines << Rubyception::Line.new(event).attrs
+    @lines << Rubyception::Line.new(event).attrs unless ignore_event?(event)
+  end
+
+  def ignore_event?(event)
+    payload = event.payload
+    case
+    when event.name == :active_record_sql && payload.name == 'SCHEMA'
+      # SCHEMA sql are things like SHOW TABLES, DESCRIBE USERS
+      true
+    else
+      false
+    end
   end
 
   def exception(exception)
-
     lines = exception.backtrace
     x = 0
     lines = lines.collect do |l|
