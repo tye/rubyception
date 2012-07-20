@@ -16,4 +16,8 @@ attach_to.each do |notification|
   Rubyception::Subscriber.attach_to notification
 end
 
-::ActionDispatch::DebugExceptions.send(:include,Rubyception::ExceptionsCatcher)
+if defined? ::ActionDispatch::DebugExceptions
+  ::ActionDispatch::DebugExceptions.send(:include,Rubyception::ExceptionsCatcher)
+else
+  ::ActionDispatch::ShowExceptions.send(:include,Rubyception::ExceptionsCatcher)
+end
