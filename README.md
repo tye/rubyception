@@ -1,6 +1,11 @@
 # Rubyception
 
-This project rocks and uses MIT-LICENSE.
+A realtime log viewer for Rails (released under the MIT license)
+
+## Features
+
+* Real-time updating of the log file using Websocket
+* Filenames in exceptions are shown as links which open in MacVim (support for TextMate and other editors to be added soon)
 
 ## Installation
 
@@ -28,7 +33,3 @@ must be using a browser that supports Websockets.
 `G` Go to last entry<br>
 `gg` Go to first entry<br>
 `42gg` or `42G` Go to 42nd entry<br>
-
-## Features
-* Real-time updating of the log file using Websocket
-* Filenames in exceptions are shown as links which open in MacVim (support for TextMate and other editors to be added soon)
