@@ -6,7 +6,9 @@ module Rubyception::ExceptionsCatcher
   end
 
   def render_exception_with_rubyception env, exception
-    Rubyception::WebsocketServer.current_entry.exception exception
+    if Rubyception::WebsocketServer.current_entry
+      Rubyception::WebsocketServer.current_entry.exception exception
+    end
     render_exception_without_rubyception env, exception
   end
 end
