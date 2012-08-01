@@ -1,5 +1,4 @@
-#= require jquery
-#= require jquery_ujs
+#= require rubyception/lib/jquery
 #= require rubyception/lib/underscore-min
 #= require rubyception/lib/backbone
 #= require rubyception/lib/milk
