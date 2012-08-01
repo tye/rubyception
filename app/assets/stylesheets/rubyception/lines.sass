@@ -1,11 +1,11 @@
-@import compass/css3/border-radius
-@import compass/css3/box-shadow
 .lines
   :font-family 'Menlo'
   :margin
     :top 5px
   :background rgb(32, 32, 32)
-  +box-shadow(rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset)
+  :-webkit-box-shadow rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+  :-moz-box-shadow    rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+  :box-shadow         rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
   table
     :border-collapse collapse
     :width 100%

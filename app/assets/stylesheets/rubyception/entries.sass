@@ -1,8 +1,8 @@
-@import compass/css3/border-radius
-@import compass/css3/box-shadow
 .entry
   :position relative
-  +box-shadow(rgba(255, 255, 255, 0.07) 0 1px 0)
+  :-webkit-box-shadow rgba(255, 255, 255, 0.07) 0px 1px 0
+  :-moz-box-shadow    rgba(255, 255, 255, 0.07) 0px 1px 0
+  :box-shadow         rgba(255, 255, 255, 0.07) 0px 1px 0
   :border
     :bottom 1px solid rgb(18, 18, 18)
   :font-size 14px
@@ -14,7 +14,9 @@
     :height 100%
     :float left
     :width 3px
-    +border-radius(3px)
+    :-webkit-border-radius 3px
+    :-moz-border-radius    3px
+    :border-radius         3px
     :margin
       :right 5px
   .marker.good
