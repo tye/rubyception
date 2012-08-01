@@ -15,5 +15,7 @@
 /tmp
 
 .sass-cache/*
+/test/dummy/.sass-cache/*
+/test/dummy/tmp/*
 
 *.DS_Store
