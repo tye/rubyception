@@ -35,10 +35,9 @@ class App.Routers.Log extends Backbone.Router
     m.bind ['j','down'] , @log.entries_index.down
     m.bind ['k','up']   , @log.entries_index.up
     m.bind String(i)    , _.bind @log.entries_index.number_hotkey, @, String(i) for i in [0..9]
-    m.bind 'o'          , @collection.open_selected
     m.bind 'shift+g'    , _.bind @log.entries_index.goto_number, @, 'bottom'
     m.bind 'g g'        , _.bind @log.entries_index.goto_number, @, 'top'
-    m.bind 'enter'      , @log.entries_index.toggle_open
+    m.bind ['o','enter'], @log.entries_index.toggle_open
   index: =>
     @log = @partial '.content', 'logs/show',
              collection: @collection
