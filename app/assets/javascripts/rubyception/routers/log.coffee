@@ -30,6 +30,8 @@ class App.Routers.Log extends Backbone.Router
     @index()
   toggle_side: =>
     $('.wrapper').toggleClass 'filter'
+  toggle_params: =>
+    $('body').toggleClass 'pretty_params'
   hotkeys: =>
     m = Mousetrap
     m.bind '\\ n'       , @toggle_side
@@ -38,6 +40,7 @@ class App.Routers.Log extends Backbone.Router
     m.bind String(i)    , _.bind @log.entries_index.number_hotkey, @, String(i) for i in [0..9]
     m.bind 'shift+g'    , _.bind @log.entries_index.goto_number, @, 'bottom'
     m.bind 'g g'        , _.bind @log.entries_index.goto_number, @, 'top'
+    m.bind 'p'          , @toggle_params
     m.bind ['o','enter'], @log.entries_index.toggle_open
   index: =>
     App.column = @partial '.column', 'shared/filters'

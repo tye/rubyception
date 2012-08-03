@@ -18,8 +18,22 @@ class App.Views.Entries.Entry extends Backbone.View
     @el_template 'entries/entry'
     @color_ms()
     @color_marker()
+    @params()
     @backtrace()
     @lines()
+  params:->
+    params = @model.get 'params'
+    html   = _.map params, (v,k)->
+      boolean = v is true or v is false
+      number  = !isNaN(parseFloat(v)) && isFinite(v)
+      kind    = if boolean then 'boolean'
+      else      if number  then 'number'
+      else
+        v = "'#{v}'"
+        'string'
+
+      "<span class='param'><span class='key'>#{k}</span><span class='colon'>:</span> <span class='value #{kind}'>#{v}</span></span>"
+    $(@el).find('.params').html html.join('')
   backtrace:->
     backtrace = @model.get 'backtrace'
     if backtrace

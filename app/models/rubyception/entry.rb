@@ -28,7 +28,10 @@ class Rubyception::Entry
     self.error      = payload[:exception].present?
     self.duration   = event.duration.to_f.round(2)
     self.id         = event.transaction_id
-    self.params     = payload[:params]
+		params          = payload[:params]
+		params.delete 'controller'
+		params.delete 'action'
+    self.params     = params
     self.start_time = event.time.to_s :entry
     self.end_time   = event.end.to_s  :entry
   end
@@ -83,6 +86,7 @@ class Rubyception::Entry
 
   def to_json
     methods = %w{controller
+								 params
                  action
                  path
                  method

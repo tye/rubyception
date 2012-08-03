@@ -45,17 +45,50 @@
         :color rgb(50,250,100)
       .datetime
         :color rgb(120,120,120)
-  .lines, .backtrace_lines
+  .lines, .backtrace_lines, .params
     :display none
   &.ignore
     :display none
   &.selected
     :background rgb(55,55,55)
   &.open
-    .lines, .backtrace_lines
+    .lines, .backtrace_lines, .params
       :display block
     :padding-bottom 10px
 .position_marker
   :background rgb(255,0,0)
   :height 2px
   :margin 2px 0
+
+.params
+  :padding 5px
+    :top 0px
+  :font-size 12px
+  .key
+    :color rgb(160,160,160)
+  .value
+    :margin
+      :left 5px
+      :right 10px
+  .string
+    :color rgb(0,200,100)
+  .number
+    :color rgb(0,100,200)
+  .boolean
+    :color rgb(200,200,0)
+
+
+body.pretty_params
+  .open
+    .params
+      .param
+        :display block
+      //:display table
+      //:border-collapse collapse
+      //:border none
+      //.param
+        //:display table-row
+        //span
+          //:display table-cell
+        //.key, .colon
+          //:width 1%
