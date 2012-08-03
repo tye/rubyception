@@ -57,7 +57,7 @@ CollectionHelpers =
   collect:->
     e         = $ @context.el
     find      = arguments[0]
-    has_find  = find isnt undefined
+    has_find  = find isnt undefined && find isnt null
     options   = arguments[1]
     options ||= {}
 
@@ -65,12 +65,12 @@ CollectionHelpers =
     delete options.template_index
     template_index = ti
     template_index = "#{@name}/index" if ti is undefined
-    e
-    html = @context.template template_index, options.args || {}
 
     hti  = options.has_template_index
     delete options.has_template_index
-    e.html html if hti != false
+    if hti != false
+      html = @context.template template_index, options.args || {}
+      e.html html 
 
     t    = options.template
     delete options.template

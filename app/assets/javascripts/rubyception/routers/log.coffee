@@ -8,6 +8,7 @@ class App.Routers.Log extends Backbone.Router
     socket.onclose   = @onclose
     socket.onmessage = @onmessage
     @collection       = new App.Collections.Entries()
+    App.enteries      = @collection
     @collection.model = App.Models.Entry
     @default()
   onmessage:(msg)=>
@@ -39,6 +40,7 @@ class App.Routers.Log extends Backbone.Router
     m.bind 'g g'        , _.bind @log.entries_index.goto_number, @, 'top'
     m.bind ['o','enter'], @log.entries_index.toggle_open
   index: =>
+    App.column = @partial '.column', 'shared/filters'
     @log = @partial '.content', 'logs/show',
-             collection: @collection
+      collection: @collection
     @hotkeys()

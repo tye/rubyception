@@ -4,6 +4,9 @@ entries:
 backtrace_lines:
   - index
   - backtrace_line
+shared:
+  - filter_controller
+  - filter_action
 lines:
   index:
   action_controller:
