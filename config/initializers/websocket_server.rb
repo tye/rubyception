@@ -2,7 +2,11 @@ require 'rubyception/websocket_server'
 require 'rubyception/subscriber'
 require 'rubyception/catcher'
 
-::Rails.logger.auto_flushing = true
+if ::Rails.logger.respond_to?(:auto_flushing=)
+  ::Rails.logger.auto_flushing = true
+end
+
+.auto_flushing = true
 Rubyception::WebsocketServer.sockets = []
 Rubyception::WebsocketServer.new
 
