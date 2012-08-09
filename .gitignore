@@ -19,3 +19,4 @@
 /test/dummy/tmp/*
 
 *.DS_Store
+*.gem
