@@ -20,6 +20,9 @@ class Rubyception::WebsocketServer
       options = { 
         host: '0.0.0.0',
         port: 3030 }
+      while defined?(Thin) && !EventMachine.reactor_running?
+        sleep 1
+      end
       EventMachine::WebSocket.start(options) do |ws|
         ws.onopen do
           Rubyception::WebsocketServer.sockets << ws
