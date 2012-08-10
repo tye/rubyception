@@ -2,6 +2,14 @@
 
 A realtime log viewer for Rails (released under the MIT license)
 
+--------------------
+
+This shows a normal log entry
+![screenshot 1](https://s3.amazonaws.com/tye/rubyception1.png)
+
+This entry has an exception. The backtrace file names are clickable and will open in MacVim. Soon support for TextMate & other editors will be added.
+![screenshot 2](https://s3.amazonaws.com/tye/rubyception2.png)
+
 ## Features
 
 * Real-time updating of the log file using Websocket
