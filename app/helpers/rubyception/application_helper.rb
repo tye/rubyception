@@ -6,15 +6,12 @@ module Rubyception
         onclick: 'return false'
     end
     def parse_tree tree, parents=[], result={}
-      Rails.logger.info "Start #{tree.inspect}"
       if tree.is_a?(String)
-          Rails.logger.info "Val is a string"
           item = result
           parents.each do |parent|
             item[parent] ||= {}
             item = item[parent]
           end
-          Rails.logger.info "Render #{parents.join('/')}/_#{tree}.haml"
           item[tree] = render(partial: "rubyception/#{parents.join('/')}/#{tree}")
       elsif tree.is_a?(Hash)
         tree.each do |key, val|

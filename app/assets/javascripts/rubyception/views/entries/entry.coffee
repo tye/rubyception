@@ -35,25 +35,19 @@ class App.Views.Entries.Entry extends Backbone.View
     text = text.replace />/g, '&gt;'
     text
   nested_params: (params)=>
-    console.log 'Nested', params
     inner_html = _.map params, (v,k) =>
       name = k
       if typeof v != 'string'
-        console.log "Recursing into", v
         definition = @nested_params(v).html()
-        console.log "Rescuring definition is", definition
       else
-        console.log "Its a string", v
         definition = "<span class='value string'>#{@escape_html v}</span>"
       "<dt class='key'>#{@escape_html k}<span class='colon'>:</span></dt><dd>#{definition}</dt>"
-    console.log(inner_html)
     html = "<dl>#{inner_html.join('')}</dl>"
     $(@el).find('.params .nested').html html
 
   params:->
     params = @model.get 'parsed_params'
     html   = _.map params, (v,k)=>
-      v = JSON.stringify JSON.parse v
       "<span class='param'><span class='key'>#{@escape_html k}</span><span class='colon'>:</span> <span class='value string'>#{@escape_html v}</span></span>"
     $(@el).find('.params .basic').append html.join('')
   backtrace:->

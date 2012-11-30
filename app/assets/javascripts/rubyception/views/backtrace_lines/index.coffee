@@ -6,7 +6,6 @@ class App.Views.BacktraceLines.Index extends Backbone.View
     @name = @options.name
     @bind_render()
   render: =>
-    console.log @options
     @collection.collect 'tbody',
       args:
         name: @name
