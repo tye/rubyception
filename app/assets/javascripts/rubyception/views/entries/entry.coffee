@@ -21,6 +21,7 @@ class App.Views.Entries.Entry extends Backbone.View
     @params()
     @backtrace()
     @lines()
+    _.defer window.sh_highlightDocument
   params:->
     params = @model.get 'params'
     html   = _.map params, (v,k)->
