@@ -1,0 +1,5 @@
+0.1.2
+	- Rubyception will now only load itself if a server is starting
+	- Added SQL syntax highlighting
+	- You can expand the request parameters to view them in "nested" format
+	- Some layout changes
