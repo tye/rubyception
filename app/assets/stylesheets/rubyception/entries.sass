@@ -1,3 +1,5 @@
+body
+  :width 100%
 .entry
   :position relative
   :-webkit-box-shadow rgba(255, 255, 255, 0.07) 0px 1px 0
@@ -27,14 +29,33 @@
     :background rgb(250,50,0)
   .details
     :padding 0 10px
+    .method
+      :width 70px
+    .controller
+      :width 200px
+    .format
+      :width 50px
+    .datetime
+      :width 70px
+    .ms
+      :width 80px
     .method, .format
       :text-transform uppercase
-    .heading
+    .heading_wrapper
       :padding 10px 0 10px 0
-      div
-        :display inline-block
+    .heading
+      :overflow auto
+      :table-layout fixed
+      :border-collapse collapse
+      :width 100%
+      td
+        :padding-right 5px
+        :white-space nowrap
+        :overflow hidden
+        :text-overflow ellipsis
+      td:last-child
+        :padding-right 0
       .ms, .datetime
-        :float right
         :margin
           :left 10px
       .ms.slow
@@ -60,7 +81,7 @@
   :height 2px
   :margin 2px 0
 
-.params
+.params, .nested_params
   :padding 5px
     :top 0px
   :font-size 12px
@@ -92,3 +113,31 @@ body.pretty_params
           //:display table-cell
         //.key, .colon
           //:width 1%
+.params
+  .nested
+    :display none
+  a.toggle_params
+    :display block
+    :float left
+    :width 15px
+    :height 15px
+    :background image-url('rubyception/entry_collapse.png') no-repeat center center
+
+.params.nested
+  a.toggle_params
+    :background image-url('rubyception/entry_expand.png') no-repeat center center
+  .basic
+    :display none
+  .nested
+    :display block
+.nested
+  :clear both
+dt
+  :clear both
+  :margin-right 10px
+  :text-align right
+  :width 120px
+  :word-wrap break-word
+dt, dd
+  :float left
+

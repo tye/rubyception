@@ -1,13 +1,20 @@
 .marker
 .details
-  .heading
-    .method   {{method}}
-    .format   {{format}}
-    = '{{controller}}#{{action}}'
-    .path     {{path}}
-    .datetime {{start_time}}
-    .ms       {{duration}}ms
+  .heading_wrapper
+    %table.heading
+      %tr
+        %td.method   {{method}}
+        %td.controller{title: '{{controller}}#{{action}}'}
+          = '{{controller}}#{{action}}'
+        %td.format   {{format}}
+        %td.path{title: '{{path}}'}     {{path}}
+        %td.datetime {{start_time}}
+        %td.ms       {{duration}}ms
   .params
+    %a.toggle_params{href: '#'}
+    .basic
+    %dl.nested
+  .clear
   .lines
   .backtrace_lines
 .clear

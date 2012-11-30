@@ -515,12 +515,9 @@ function sh_highlightDocument(prefix, suffix) {
   for (var i = 0; i < nodeList.length; i++) {
     var element = nodeList.item(i);
     var htmlClasses = sh_getClasses(element);
-    console.log(htmlClasses)
     if (_.include(htmlClasses, 'sh_sourceCode')) {
-      console.log('Skipping')
       continue;
     }
-    console.log('Parsing')
     for (var j = 0; j < htmlClasses.length; j++) {
       var htmlClass = htmlClasses[j].toLowerCase();
       if (htmlClass === 'sh_sourcecode') {

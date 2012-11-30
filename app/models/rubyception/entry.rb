@@ -32,8 +32,41 @@ class Rubyception::Entry
 		params.delete 'controller'
 		params.delete 'action'
     self.params     = params
-    self.start_time = event.time.to_s :entry
-    self.end_time   = event.end.to_s  :entry
+    self.start_time = event.time.strftime('%H:%M:%S')
+    self.end_time   = event.end.strftime('%H:%M:%S')
+  end
+
+
+  def parsed_params
+    result = {}
+    jsonified = params.collect do |key,val|
+      [key, val.to_json]
+    end
+    Hash[jsonified]
+  end
+
+  def deep_clone_hash hash
+    result = {}
+    hash.each do |k,v|
+      if v.is_a? Hash
+        result[k] = deep_clone_hash v
+      else
+        result[k] = v
+      end
+    end
+    result
+  end
+
+  def parsed_nested_params params=nil
+    params ||= deep_clone_hash(self.params)
+    if params.kind_of? Hash
+      params.each do |key,val|
+        params[key] = parsed_nested_params(params[key])
+      end
+    else
+      return params.inspect
+    end
+    params
   end
 
   def error?; error; end
@@ -97,6 +130,8 @@ class Rubyception::Entry
                  backtrace
                  finished
                  start_time
+                 parsed_params
+                 parsed_nested_params
                  end_time}
     result = {}
     methods.each do |method|

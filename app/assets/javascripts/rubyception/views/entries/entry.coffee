@@ -1,11 +1,17 @@
 class App.Views.Entries.Entry extends Backbone.View
   className: 'entry'
   events:
+    'click .toggle_params': 'toggle_params'
     'click': 'select_and_toggle'
   initialize: ->
     @model.bind 'notice', @notice
     @model.bind 'ignore', @ignore
     @render()
+  toggle_params: (e) =>
+    params = @$ '.params'
+    params.toggleClass 'nested'
+    e.preventDefault()
+    e.stopPropagation()
   select_and_toggle: (event) =>
     target = $ event.target
     # Return unless we clicked directory on .details, or .heading, or a child of .heading
@@ -20,21 +26,36 @@ class App.Views.Entries.Entry extends Backbone.View
     @color_marker()
     @params()
     @backtrace()
+    @nested_params @model.get 'parsed_nested_params'
     @lines()
     _.defer window.sh_highlightDocument
-  params:->
-    params = @model.get 'params'
-    html   = _.map params, (v,k)->
-      boolean = v is true or v is false
-      number  = !isNaN(parseFloat(v)) && isFinite(v)
-      kind    = if boolean then 'boolean'
-      else      if number  then 'number'
+  escape_html: (text) =>
+    text = text.replace /&/g, '&amp;'
+    text = text.replace /</g, '&lt;'
+    text = text.replace />/g, '&gt;'
+    text
+  nested_params: (params)=>
+    console.log 'Nested', params
+    inner_html = _.map params, (v,k) =>
+      name = k
+      if typeof v != 'string'
+        console.log "Recursing into", v
+        definition = @nested_params(v).html()
+        console.log "Rescuring definition is", definition
       else
-        v = "'#{v}'"
-        'string'
+        console.log "Its a string", v
+        definition = "<span class='value string'>#{@escape_html v}</span>"
+      "<dt class='key'>#{@escape_html k}<span class='colon'>:</span></dt><dd>#{definition}</dt>"
+    console.log(inner_html)
+    html = "<dl>#{inner_html.join('')}</dl>"
+    $(@el).find('.params .nested').html html
 
-      "<span class='param'><span class='key'>#{k}</span><span class='colon'>:</span> <span class='value #{kind}'>#{v}</span></span>"
-    $(@el).find('.params').html html.join('')
+  params:->
+    params = @model.get 'parsed_params'
+    html   = _.map params, (v,k)=>
+      v = JSON.stringify JSON.parse v
+      "<span class='param'><span class='key'>#{@escape_html k}</span><span class='colon'>:</span> <span class='value string'>#{@escape_html v}</span></span>"
+    $(@el).find('.params .basic').append html.join('')
   backtrace:->
     backtrace = @model.get 'backtrace'
     if backtrace
