@@ -46,6 +46,9 @@ class App.Views.Entries.Entry extends Backbone.View
     $(@el).find('.params .nested').html html
 
   params:->
+    if $.isEmptyObject @model.get('parsed_params')
+      @$('.params').hide()
+      return
     params = @model.get 'parsed_params'
     html   = _.map params, (v,k)=>
       "<span class='param'><span class='key'>#{@escape_html k}</span><span class='colon'>:</span> <span class='value string'>#{@escape_html v}</span></span>"

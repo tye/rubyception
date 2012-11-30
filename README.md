@@ -17,22 +17,32 @@ This entry has an exception. The backtrace file names are clickable and will ope
 
 ## Installation
 
-Add to your gemfile:
+Add to your gemfile **in the development group**:
 ```ruby
-gem 'rubyception'
+group :development do
+  gem 'rubyception'
+end
 ```
 Run:
 ```
 bundle install
 ```
-Add to your routes:
+
+Add to your `config/routes.rb`:
 ```ruby
-match 'rubyception' => 'rubyception/application#index'
+mount Rubyception::Engine => '/rubyception'
 ```
-Open your app and go to:<br>
+Run your rails server and go to:<br>
 `http://localhost:3000/rubyception`<br>
 Your log entries will appear on the rubyception page in realtime. You
 must be using a browser that supports Websockets.
+
+## Using in Production
+Rubyception is not intended to be used in a production environment. If
+you need exception handling in production I recommend
+[Airbrake](http://airbrake.io/pages/home),
+[Exceptional](http://www.exceptional.io/) or
+[NewRelic](https://newrelic.com/).
 
 ## Hotkeys
 `up` or `k` Move selection up<br>
@@ -41,3 +51,5 @@ must be using a browser that supports Websockets.
 `G` Go to last entry<br>
 `gg` Go to first entry<br>
 `42gg` or `42G` Go to 42nd entry<br>
+`p` Toggles between inline and nested parameters view if you have a log
+entry open<br>
