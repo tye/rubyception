@@ -28,10 +28,12 @@ class App.Routers.Log extends Backbone.Router
       @collection.add data
   default: ->
     @index()
+  toggle_params: =>
+    expanded_entry = $('.entry.selected.open')
+    if expanded_entry.length > 0
+      expanded_entry.find('.params').toggleClass 'nested'
   toggle_side: =>
     $('.wrapper').toggleClass 'filter'
-  toggle_params: =>
-    $('body').toggleClass 'pretty_params'
   hotkeys: =>
     m = Mousetrap
     m.bind '\\ n'       , @toggle_side
