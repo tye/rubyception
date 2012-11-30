@@ -8,8 +8,8 @@ shared:
   - filter_controller
   - filter_action
 lines:
-  index:
-  action_controller:
+  - index
+  - action_controller:
     - write_fragment
     - read_fragment
     - expire_fragment
@@ -22,18 +22,18 @@ lines:
     - send_data
     - redirect_to
     - halted_callback
-  action_view:
+  - action_view:
     - render_template
     - render_partial
-  active_record:
+  - active_record:
     - sql
     - identity
-  action_mailer:
+  - action_mailer:
     - receive
     - deliver
-  active_resource:
+  - active_resource:
     - request
-  active_support:
+  - active_support:
     - cache_read
     - cache_generate
     - cache_fetch_hit

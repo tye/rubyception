@@ -1,0 +1,4 @@
+<%=
+  parse_tree Rubyception::TEMPLATES, [], @templates
+  "window.Template = #{@templates.to_json};".html_safe
+%>
