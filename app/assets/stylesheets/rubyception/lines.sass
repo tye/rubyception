@@ -1,5 +1,6 @@
 .lines
-  :font-family 'Menlo'
+  tr, td, pre, div, span
+    :font-family monospace
   :margin
     :top 5px
   :background rgb(32, 32, 32)
@@ -13,24 +14,26 @@
       :vertical-align bottom
   .line
     :font-size 11px
+    .name, .duration, .msg, .layout
+      :white-space nowrap
+    .num,.msg
+      :padding 1px 5px
     .duration
       :text-align right
       :color rgb(50,250,100)
-    .num,.msg
-      :display inline-block
-      :padding 1px 5px
-    .msg
-      :padding
-        :left 1px
     .num
       :text-align right
       :background rgb(0,0,0)
     td:first-child
+      :background rgb(10,10,10)
       :padding
+        :right 5px
         :left 5px
     td:last-child
       :padding
         :right 5px
+    .max
+      :width 100%
   .line:first-child
     td
       :padding
