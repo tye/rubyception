@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'em-websocket'
   s.add_dependency 'compass'
   s.add_dependency 'coffee-script'
+  s.add_dependency 'jquery-rails'
   s.add_development_dependency "sqlite3"
 end
