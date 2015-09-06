@@ -1,0 +1,24 @@
+.entries{ng:{controller: 'LogCtrl'}}
+  .entry{'highlighting-on-open' => '', ng:{repeat: 'model in entries', click: 'open(model)', class: 'classes(model)'}}
+    .marker
+    .details
+      .heading_wrapper
+        %table.heading
+          %tr
+            %td.method   {{model.method}}
+            %td.controller{title: '{{model.controller}}#{{model.action}}'}
+              = '{{model.controller}}#{{model.action}}'
+            %td.format   {{model.format}}
+            %td.path{title: '{{model.path}}'}     {{model.path}}
+            %td.datetime {{model.start_time}}
+            %td.ms       {{model.duration}}ms
+      .params
+        .base_params{params: 'model.params'}
+      .clear
+      .lines
+        .line{ng:{repeat: 'line in model.lines'}}
+          .event_name {{line.human_name}}
+          .template{ng:{include: 'line | line_template'}}
+      .backtrace_lines
+    .clear
+

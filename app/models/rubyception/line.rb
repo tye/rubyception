@@ -1,11 +1,12 @@
 class Rubyception::Line
   attr_accessor :event
   attr_accessor :params
-  attr_accessor :duration
+  attr_accessor :duration, :payload
 
   def initialize(event)
     self.event    = event.name
     self.params   = event.payload
+    self.payload = event.payload
     self.duration = event.duration.to_f.round(2)
   end
 
@@ -14,6 +15,8 @@ class Rubyception::Line
     hook      = hook.sub /\?/, ''
     data = {
       kind:     kind,
+      human_name: hook.humanize,
+      payload: payload,
       hook:     hook,
       duration: duration }
 
@@ -47,6 +50,7 @@ class Rubyception::Line
       when :active_support_cache_exist         then params
     end
     data.merge! params
+    data
   end
 
   def remove_root text

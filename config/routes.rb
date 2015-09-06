@@ -1,4 +1,4 @@
 Rubyception::Engine.routes.draw do
-  get '/templates' => 'templates#index'
+  get '/logs' => 'logs#index'
   root to: 'application#index'
 end

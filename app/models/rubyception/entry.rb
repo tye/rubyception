@@ -11,7 +11,9 @@ class Rubyception::Entry
                 :backtrace,
                 :finished,
                 :start_time,
-                :end_time
+                :end_time,
+                :event_name,
+                :payload
 
   def initialize(event)
     set_values event
@@ -20,6 +22,8 @@ class Rubyception::Entry
 
   def set_values event
     payload         = event.payload
+    self.payload = event.payload
+    self.event_name = event.name.split('.').first
     self.controller = payload[:controller].gsub(/Controller$/,'').downcase.underscore
     self.action     = payload[:action]
     self.path       = payload[:path]
@@ -34,45 +38,17 @@ class Rubyception::Entry
     self.params     = params
     self.start_time = event.time.strftime('%H:%M:%S')
     self.end_time   = event.end.strftime('%H:%M:%S')
-  end
-
-
-  def parsed_params
-    result = {}
-    jsonified = params.collect do |key,val|
-      [key, val.to_json]
-    end
-    Hash[jsonified]
-  end
-
-  def deep_clone_hash hash
-    result = {}
-    hash.each do |k,v|
-      if v.is_a? Hash
-        result[k] = deep_clone_hash v
-      else
-        result[k] = v
-      end
-    end
-    result
-  end
-
-  def parsed_nested_params params=nil
-    params ||= deep_clone_hash(self.params)
-    if params.kind_of? Hash
-      params.each do |key,val|
-        params[key] = parsed_nested_params(params[key])
-      end
-    else
-      return params.inspect
-    end
-    params
+  rescue Exception => e
+    puts "#{e.class.name}: #{e.message}"
   end
 
   def error?; error; end
 
   def <<(event)
-    @lines << Rubyception::Line.new(event).attrs unless ignore_event?(event)
+    puts "Event = #{event.inspect}"
+    attrs = Rubyception::Line.new(event).attrs
+    puts "Attrs = #{attrs.inspect}"
+    @lines << attrs.clone unless ignore_event?(event)
   end
 
   def ignore_event?(event)
@@ -114,12 +90,13 @@ class Rubyception::Entry
   def finalize(event)
     set_values(event)
     self.finished = true
-    flush! unless error?
+    #flush! unless error?
   end
 
   def to_json
     methods = %w{controller
 								 params
+                 event_name
                  action
                  path
                  method
@@ -130,8 +107,7 @@ class Rubyception::Entry
                  backtrace
                  finished
                  start_time
-                 parsed_params
-                 parsed_nested_params
+                 payload
                  end_time}
     result = {}
     methods.each do |method|
@@ -139,7 +115,23 @@ class Rubyception::Entry
       result[method] = self.send method
     end
     result = result.merge lines: @lines
-    result.to_json
+    result[:human_name] = event_name.humanize
+    sanitize_paths result
+  rescue Exception => e
+    puts "A-#{e.class.name}: #{e.message}"
+    puts e.backtrace.join("\n")
+  end
+
+  def sanitize_paths value
+    if value.is_a?(Array)
+      value.collect{|v| sanitize_paths(v)}
+    elsif value.is_a?(Hash)
+      Hash[value.collect{|k,v| [k,sanitize_paths(v)]}]
+    elsif value.is_a?(Pathname)
+      value.to_s
+    else
+      value
+    end
   end
 
   def flush!

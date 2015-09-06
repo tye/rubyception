@@ -99,45 +99,27 @@ body
     :color rgb(200,200,0)
 
 
-body.pretty_params
-  .open
-    .params
-      .param
-        :display block
-      //:display table
-      //:border-collapse collapse
-      //:border none
-      //.param
-        //:display table-row
-        //span
-          //:display table-cell
-        //.key, .colon
-          //:width 1%
 .params
-  .nested
-    :display none
-  a.toggle_params
-    :display block
-    :float left
-    :width 15px
-    :height 15px
-    :background image-url('rubyception/entry_collapse.png') no-repeat center center
-
-.params.nested
-  a.toggle_params
-    :background image-url('rubyception/entry_expand.png') no-repeat center center
-  .basic
-    :display none
-  .nested
-    :display block
-.nested
-  :clear both
-dt
-  :clear both
-  :margin-right 10px
-  :text-align right
-  :width 120px
-  :word-wrap break-word
-dt, dd
-  :float left
+  .base_params
+    float: left
+    &.collapsed
+      display: none
+  .list
+    padding-left: 10px
+    .key, .value
+      float: left
+    .value.array, .value.object
+      float: none
+      clear: both
+    .value.collapsed
+      display: none
+  a.toggle
+    display: block
+    float: left
+    width: 15px
+    height: 15px
+    cursor: pointer
+    background: image-url('rubyception/entry_expand.png') no-repeat center center
+    &.collapsed
+      background: image-url('rubyception/entry_collapse.png') no-repeat center center
 

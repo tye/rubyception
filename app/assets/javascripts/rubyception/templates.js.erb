@@ -1,0 +1,8 @@
+angular.module("rubyception").run(["$templateCache", function($templateCache) {
+  <% Rubyception::TemplatesController.render_templates.each do |k,v| %>
+    $templateCache.put(<%= k.to_json %>, <%= v.to_json %>)
+  <% end %>
+}]);
+
+
+

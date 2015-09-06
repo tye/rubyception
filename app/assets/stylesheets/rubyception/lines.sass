@@ -1,44 +1,71 @@
 .lines
-  tr, td, pre, div, span
-    :font-family monospace
-  :margin
-    :top 5px
-  :background rgb(32, 32, 32)
-  :-webkit-box-shadow rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
-  :-moz-box-shadow    rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
-  :box-shadow         rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
-  table
-    :border-collapse collapse
-    :width 100%
-    td
-      :vertical-align bottom
+  background: rgb(32,32,32)
+  -webkit-box-shadow: rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+  -moz-box-shadow: rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+  box-shadow: rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+
   .line
-    :font-size 11px
-    .name, .duration, .msg, .layout
-      :white-space nowrap
-    .num,.msg
-      :padding 1px 5px
-    .duration
-      :text-align right
-      :color rgb(50,250,100)
-    .num
-      :text-align right
-      :background rgb(0,0,0)
-    td:first-child
-      :background rgb(10,10,10)
-      :padding
-        :right 5px
-        :left 5px
-    td:last-child
-      :padding
-        :right 5px
-    .max
+    .event_name
+      display: inline-block
+      background: rgb(10,10,10)
+      padding: 3px 5px
+      width: 100px
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+      vertical-align: top
+      font-size: 11px
+      font-family: monospace
+    .template
+      display: inline-block
+      & > div, span
+        display: inline-block
+        font-size: 11px
+        font-family: monospace
+//
+  .lines
+    tr, td, pre, div, span
+      :font-family monospace
+    :margin
+      :top 5px
+    :background rgb(32, 32, 32)
+    :-webkit-box-shadow rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+    :-moz-box-shadow    rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+    :box-shadow         rgba(255, 255, 255, 0.0976563) 0px 1px 0px 0px, rgba(0, 0, 0, 0.796875) 0px 1px 7px 0px inset
+    table
+      :border-collapse collapse
       :width 100%
-  .line:first-child
-    td
-      :padding
-        :top 5px
-  .line:last-child
-    td
-      :padding
-        :bottom 5px
+      td
+        :vertical-align bottom
+    .line
+      :font-size 11px
+      div
+        display: inline-block
+      .name, .duration, .msg, .layout
+        :white-space nowrap
+      .num,.msg
+        :padding 1px 5px
+      .duration
+        :text-align right
+        :color rgb(50,250,100)
+      .num
+        :text-align right
+        :background rgb(0,0,0)
+      div:first-child
+        :background rgb(10,10,10)
+        :padding
+          :right 5px
+          :left 5px
+      div:last-child
+        :padding
+          :right 5px
+      .max
+        :width 100%
+    .line:first-child
+      td
+        :padding
+          :top 5px
+    .line:last-child
+      td
+        :padding
+          :bottom 5px

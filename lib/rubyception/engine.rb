@@ -6,9 +6,9 @@ module Rubyception
       require 'rubyception/subscriber'
       require 'rubyception/catcher'
 
-      Rubyception::WebsocketServer.sockets = []
+      #Rubyception::WebsocketServer.sockets = []
       puts "[RUBYCEPTION] Starting Websocket server"
-      Rubyception::WebsocketServer.new
+      #Rubyception::WebsocketServer.new
 
       attach_to = [
         :action_controller,
